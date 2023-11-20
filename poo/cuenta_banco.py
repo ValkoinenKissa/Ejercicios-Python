@@ -39,7 +39,10 @@ class Cuenta:
         else:
             print("La cantidad que deseas retirar debe ser mayor que 0")
 
-    def menu_opciones(self, opcion):
+    """def menu_opciones(self, opcion):
+        match(opcion):
+            case 1:"""
+
 
 
 
