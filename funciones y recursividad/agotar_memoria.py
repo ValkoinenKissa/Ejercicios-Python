@@ -1,5 +1,12 @@
-def pedir_memoria(num):
-    return pedir_memoria(num)
+from platform import *
 
+print(processor())
 
-pedir_memoria(1000000000000000000)
+print(platform())
+print(platform(1))
+print(platform(0, 1))
+
+print(python_implementation())
+
+for atr in python_version_tuple():
+    print(atr)
