@@ -26,14 +26,12 @@ class ControlVolumen:
         print("El volumen actual es de: ", self.vol)
 
 
-
 def main():
     mp3 = ControlVolumen()
     mp3.encender()
     mp3.boton_subir()
     mp3.boton_subir()
     mp3.boton_bajar()
-
 
 
 main()

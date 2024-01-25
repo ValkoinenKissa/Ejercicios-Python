@@ -13,10 +13,7 @@ for i in cadena_texto:
     if i == " ":
         contador += 1
 
+    else:
+        pass
 
-if contador >= 1:
-    print(f"El string contenia {contador} espacios en blanco")
-
-else:
-    print("El string carecia de espacios en blanco...")
-
+print(f"La cadena introducida tenia {contador} espacios en blanco")
