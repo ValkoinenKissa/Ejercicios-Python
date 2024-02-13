@@ -37,7 +37,3 @@ def tax_calc(bruto):
     else:
         impuestos = tramo2 * 0.45 / 100
         return impuestos
-
-
-def calc_salary(bruto, impuestos, emp):
-    for i in range(1, emp+1):
