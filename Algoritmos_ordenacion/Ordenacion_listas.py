@@ -36,6 +36,25 @@ class Lista:
 
         return encontrado
 
+    def ordenar(self):
+        intercambio = True
+        while intercambio:
+            intercambio = False
+            for i in range(len(self.lista) - 1):
+                if self.lista[i] > self.lista[i + 1]:
+                    aux = self.lista[i]
+                    self.lista[i] = self.lista[i + 1]
+                    self.lista[i + 1] = aux
+                    intercambio = True
+
+    """
+        def busqueda_binaria(self, buscado):
+        izq = 0
+        derecha = len(self.lista) - 1
+        central = (izq + derecha) // 2
+        while izq <= derecha and buscado
+    """
+
     def menu_programa(self):
         print("--------------------------------")
         print("Menu listas")
