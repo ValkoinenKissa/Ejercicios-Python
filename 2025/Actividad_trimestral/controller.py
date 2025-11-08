@@ -20,8 +20,8 @@ class Controller:
 
     @staticmethod
     def start_app():
-        Controller.create_product()
         Controller.load_inventory()
+        Controller.calculate_inventory_value()
 
     # Incluyo una función para agregar más productos al fichero
     @staticmethod
@@ -59,16 +59,15 @@ class Controller:
             if str(p) == "\n":
                 break
 
-
-    #TODO Implementacion metodo para calcular valor total del inventario a partir del fichero txt
-
-
-
-
-
-
-
-    #TODO Implementacion metodo para mostrar los prodcutos agotados stock:0
+    @staticmethod
+    def calculate_inventory_value():
+        prices = IO.read_file_prices(path)
+        acum = 0
+        for i in prices:
+            acum += i
+        print(f"El valor total del inventario es de: {acum}€")
 
 
-    #TODO implementacion de metodo para mostar los productos que estan agotados
+    # TODO Implementacion metodo para mostrar los prodcutos agotados stock:0
+
+    # TODO implementacion de metodo para mostar los productos que estan agotados

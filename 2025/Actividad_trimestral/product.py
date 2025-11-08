@@ -7,6 +7,6 @@ class Product:
 
     # Sobreescritura del metodo str que es equivalente al toString de java
     def __str__(self):
-        return (f"{self.product_name}\n"
-                f"{self.price_eur}€\n"
-                f"{self.avalible_stock}\n")
+        return (f"Nombre: {self.product_name}\n"
+                f"Precio: {self.price_eur}\n"
+                f"Stock: {self.avalible_stock}\n")
