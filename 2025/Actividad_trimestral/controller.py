@@ -55,7 +55,8 @@ class Controller:
         antes de ello llamamos al metodo IO.write_file para escribir el fichero con los datos
         """
         for p in products:
-            IO.write_file(path, str(p))
+            IO.write_file(path, str(p)) #Se ejecuta la función to string sobre los productos almacenados en el array
+            # de productos, y se pasa por parametro a la función write file que escribe la salida del str en el fichero txt
             if str(p) == "\n":
                 break
 
