@@ -22,6 +22,7 @@ class Controller:
     def start_app():
         Controller.load_inventory()
         Controller.calculate_inventory_value()
+        Controller.show_products_without_any_stock()
 
     # Incluyo una función para agregar más productos al fichero
     @staticmethod
@@ -55,7 +56,7 @@ class Controller:
         antes de ello llamamos al metodo IO.write_file para escribir el fichero con los datos
         """
         for p in products:
-            IO.write_file(path, str(p)) #Se ejecuta la función to string sobre los productos almacenados en el array
+            IO.write_file(path, str(p))  # Se ejecuta la función to string sobre los productos almacenados en el array
             # de productos, y se pasa por parametro a la función write file que escribe la salida del str en el fichero txt
             if str(p) == "\n":
                 break
@@ -68,7 +69,13 @@ class Controller:
             acum += i
         print(f"El valor total del inventario es de: {acum}€")
 
+    @staticmethod
+    def show_products_without_any_stock():
+        product_list = IO.show_products_without_stock(path)
+        if len(product_list) < 0:
+            print("Actualmente no se han encontrado productos sin stock")
 
-    # TODO Implementacion metodo para mostrar los prodcutos agotados stock:0
+        else:
+            print(f"Estos son los productos que actualmente no tienen stock: {product_list}")
 
-    # TODO implementacion de metodo para mostar los productos que estan agotados
+    # TODO implementacion de metodo para actualizar el stock de un producto

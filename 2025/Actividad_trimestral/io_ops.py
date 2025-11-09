@@ -2,6 +2,8 @@ from pathlib import Path
 
 
 class IO:
+    # El decorador @staticmethod nos sirve para declararle al intérprete que un metodo es estatico y no requiere de una
+    # instancia de clase
     @staticmethod
     def read_file(path: Path):
         # with asegura que el archivo se cierre automáticamente, incluso si ocurre un error
@@ -13,27 +15,69 @@ class IO:
     def read_file_prices(path: Path):
         prices = []
 
-        with open(path, "r", encoding="utf-8") as file: #Utilizamos la codificación utf-8 para evitar fallos
-            for line in file: #with genera un buffer de lectura que es almacenado en variable file
-                #Iteramos esa variable file con un bucle for
-                if line.startswith("Precio:"): #Con la función startswith detectamos la línea del archivo donde
-                    #Se encuentra el tag Precio:
-                    value = line.split(":")[1].strip() #Split divide la cadena en una lista,
+        with open(path, "r", encoding="utf-8") as file:  # Utilizamos la codificación utf-8 para evitar fallos
+            for line in file:  # with genera un buffer de lectura que es almacenado en variable file
+                # Iteramos esa variable file con un bucle for
+                if line.startswith("Precio:"):  # Con la función startswith detectamos la línea del archivo donde
+                    # Se encuentra el tag Precio:
+                    value = line.split(":")[1].strip()  # Split divide la cadena en una lista,
                     # usando los dos puntos (:) como separador y strip elimina los espacios para que la conversion a
-                    #entero no nos dé ningún fallo
-                    prices.append(int(value)) #El valor se almacena en el array y se convierte de str a int
+                    # entero no nos dé ningún fallo
+                    prices.append(int(value))  # El valor se almacena en el array y se convierte de str a int
 
-        return prices #Se devuelve el valor para usarlo en la clase controller
+        return prices  # Se devuelve el valor para usarlo en la clase controller
+
+    @staticmethod
+    def show_products_without_stock(path: Path):
+        products_stock = []
+        with open(path, "r", encoding="utf-8") as file:
+            lines = file.readlines() #Leemos el archivo entero
+            """
+            enumerate() es una función integrada de Python que sirve para recorrer una secuencia (lista, tupla, etc.)
+             obteniendo a la vez el índice y el valor de cada elemento.
+            """
+            for i, line in enumerate(lines):
+                """
+                i es el número de línea (0, 1, 2, …).
+                line es el contenido de esa línea.
+                """
+                if line.startswith("Stock:"): #Aquí se comprueba que la línea comience con Stock: si no se ignora y
+                    #Se pasa a la siguiente
+                    value = int(line.split(":")[1].strip()) #Dividimos en dos la cadena, limpiamos espacios
+                    # y pasamos el stock a entero para evaluarlo
+                    if value == 0: #Si el stock es 0 se entra en el bucle anidado
+                        for j in range(i -1, -1, -1):
+                            """
+                            i-1 -> start -> -1 stop, -> -1 step
+                            
+                            i - 1 → empieza justo una línea antes de la línea Stock:,
+                            porque queremos mirar hacia atrás (el nombre siempre está antes del stock).
+                            En el ejemplo: i = 5, así que empezamos en 4.
+                            
+                            -1 (segundo parámetro) → es el límite final ya que 0 correspondería a la primera linea del
+                            archivo. Ej, en el archivo generado automáticamente si pusiéramos el stop = 0 correspondería
+                            a Nombre: Iphone 15 y no al final del archivo
+                            
+                            -1 (tercer parámetro) → es el paso, el incremento (en este caso decremento).
+                            Como es negativo, el bucle va hacia atrás: 4, 3, 2, 1, 0.
+                            """
+                            if lines[j].startswith("Nombre:"): #Se comprueba que la linea del la posicion del indice J
+                                #Sea == a Nombre: y se realiza la extraccion del nombre de los productos
+                                product = lines[j].split(":")[1].strip()
+                                products_stock.append(product)
+                                #Se rompe el bucle por si hay que seguir evaluando más stocks que sean igual a 0
+                                break
+        return products_stock  # Se devuelve el valor para usarlo en la clase controller
 
     @staticmethod
     def write_file(path: Path, write_string):
-        with open(path, "a") as file: #La a índica que añadimos nuevo contenido al fichero sin sobreescribirlo
+        with open(path, "a") as file:  # La a índica que añadimos nuevo contenido al fichero sin sobreescribirlo
             file.write(write_string)
 
     @staticmethod
     def path_exits_false():
         print("El fichero no existe, creando fichero con contenido predeterminado...")
-        with open("data/inventario.txt", "w") as file: #La w indica que sobreescribimos el fichero
+        with open("data/inventario.txt", "w") as file:  # La w indica que sobreescribimos el fichero
             file.write("Nombre: iPhone 15\n")
             file.write("Precio: 900 \n")
             file.write("Stock: 20\n")
