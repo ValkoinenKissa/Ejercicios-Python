@@ -23,7 +23,7 @@ class Controller:
         Controller.load_inventory()
         Controller.calculate_inventory_value()
         Controller.show_products_without_any_stock()
-
+        Controller.update_product_stock()
     # Incluyo una función para agregar más productos al fichero
     @staticmethod
     def create_product():
@@ -78,4 +78,6 @@ class Controller:
         else:
             print(f"Estos son los productos que actualmente no tienen stock: {product_list}")
 
-    # TODO implementacion de metodo para actualizar el stock de un producto
+    @staticmethod
+    def update_product_stock():
+        IO.update_stock_by_product(path, 5, "iPhone 15")

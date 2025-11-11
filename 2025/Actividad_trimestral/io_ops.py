@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 class IO:
     # El decorador @staticmethod nos sirve para declararle al intérprete que un metodo es estatico y no requiere de una
     # instancia de clase
@@ -68,6 +67,24 @@ class IO:
                                 #Se rompe el bucle por si hay que seguir evaluando más stocks que sean igual a 0
                                 break
         return products_stock  # Se devuelve el valor para usarlo en la clase controller
+
+    @staticmethod
+    def update_stock_by_product(path: Path, new_stock, product):
+        with open(path, "r", encoding="utf-8") as file:
+            lines = file.readlines()
+            for i, line in enumerate(lines):
+                if f"Nombre: {product}" in line:
+                    # El stock está 2 líneas más abajo según el formato del archivo
+                    stock_line_index = i + 2
+                    lines[stock_line_index] = f"Stock: {new_stock}\n"
+                    break  # salimos una vez hecho el cambio
+                else:
+                    print("El producto introducido no se encuentra en el fichero por favor, revisa que los \n"
+                          "espacios, mayúsculas y minúsculas del valor introducido correspondan dentro del fichero")
+        with open(path, "w", encoding="utf-8") as new_file:
+            new_file.writelines(lines)
+            print("El stock ha sido actualizado correctamente")
+
 
     @staticmethod
     def write_file(path: Path, write_string):
