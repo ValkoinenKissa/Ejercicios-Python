@@ -5,7 +5,7 @@ from io_ops import IO
 
 """
 Declaro una variable path donde instancio un objeto de la clase path, para pasarle
-el path a todos los metodos que lo requieran, declaro esta variable duera de la clase para
+el path a todos los metodos que lo requieran, declaro esta variable fuera de la clase para
 hacerla global para todo el mismo fichero
 """
 path = Path("data/inventario.txt")
@@ -20,11 +20,40 @@ class Controller:
 
     @staticmethod
     def start_app():
-        Controller.load_inventory()
-        Controller.calculate_inventory_value()
-        Controller.show_products_without_any_stock()
-        Controller.update_product_stock()
-    # Incluyo una función para agregar más productos al fichero
+        stop = False
+        print("Bienvenido al programa de gestion de inventario, elige una opción: ")
+        print("--------------------------------------------------------------------------------------------------")
+        while not stop:
+            print("1 - Carga del inventario, si el fichero no existe, se autogenerara un fichero de ejemplo")
+            print("2 - Mostrar el inventario (Se imprime en pantalla el inventario mediante un formato legible")
+            # Incluyo una función adicional para agregar más productos al fichero
+            print("3 - Introducir un nuevo producto en el inventario (genera un nuevo producto en el fichero")
+            print("4 - Calcular el valor total del inventario")
+            print("5 - Identificar productos agotados (con stock igual a 0")
+            print("6 - Actualizar cantidad de un producto (el producto debe de estar listado en el fichero)")
+            print("7 - Abandonar el programa")
+            option = str(input("Introduce la opción deseada (num opción) -> "))
+            match option:
+                case "1":
+                    Controller.load_inventory()
+                case "2":
+                    Controller.load_inventory()
+                case "3":
+                    Controller.create_product()
+                case "4":
+                    Controller.calculate_inventory_value()
+                case "5":
+                    Controller.show_products_without_any_stock()
+                case "6":
+                    Controller.update_product_stock()
+                case "7":
+                    print("¡Hasta pronto!")
+                    stop = True
+                    # Default en python se escribe con un guion bajo _
+                case _:
+                    print(f"La opcion que has introducida: {option} no se corresponde a ninguna opcion \n"
+                          f"listada en las opciones del programa, prueba de nuevo")
+
     @staticmethod
     def create_product():
         print("Usuario, introduce los datos del nuevo producto: ")
