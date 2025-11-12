@@ -32,6 +32,7 @@ class Controller:
             print("5 - Identificar productos agotados (con stock igual a 0")
             print("6 - Actualizar cantidad de un producto (el producto debe de estar listado en el fichero)")
             print("7 - Abandonar el programa")
+            print("--------------------------------------------------------------------------------------------------")
             option = str(input("Introduce la opción deseada (num opción) -> "))
             match option:
                 case "1":
@@ -51,7 +52,7 @@ class Controller:
                     stop = True
                     # Default en python se escribe con un guion bajo _
                 case _:
-                    print(f"La opcion que has introducida: {option} no se corresponde a ninguna opcion \n"
+                    print(f"La opcion que has introducido: {option} no se corresponde a ninguna opcion \n"
                           f"listada en las opciones del programa, prueba de nuevo")
 
     @staticmethod
@@ -66,6 +67,7 @@ class Controller:
         products.append(p)
         # los productos se cargan en el fichero de texto con este metodo:
         Controller.write_inventory()
+        print("¡Producto añadido con éxito!")
 
     @staticmethod
     def load_inventory():

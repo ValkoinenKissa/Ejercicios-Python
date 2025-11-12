@@ -6,9 +6,11 @@ class IO:
     @staticmethod
     def read_file(path: Path):
         # with asegura que el archivo se cierre automáticamente, incluso si ocurre un error
+        print("--------------------------------------------------------------------------------------------------")
         with open(path, "r") as file:  # La r indica a with que queremos leer el contenido
             content = file.read()
             print(content)
+        print("--------------------------------------------------------------------------------------------------")
 
     @staticmethod
     def read_file_prices(path: Path):
