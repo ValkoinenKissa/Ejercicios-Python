@@ -3,7 +3,9 @@ from pathlib import Path
 
 def format_output():
     print("--------------------------------------------------------------------------------------------------")
-#Metodo para mostrar esta linea separadora por pantalla
+
+
+# Metodo para mostrar esta linea separadora por pantalla
 
 class IO:
     # El decorador @staticmethod nos sirve para declararle al intérprete que un metodo es estatico y no requiere de una
@@ -16,6 +18,7 @@ class IO:
             content = file.read()
             print(content)
         format_output()
+
     @staticmethod
     def read_file_prices(path: Path):
         prices = []
@@ -33,7 +36,7 @@ class IO:
         return prices  # Se devuelve el valor para usarlo en la clase controller
 
     @staticmethod
-    def read_file_stock(path : Path):
+    def read_file_stock(path: Path):
         stocks = []
         with open(path, "r", encoding="utf-8") as file:
             for line in file:
@@ -41,13 +44,13 @@ class IO:
                     value = line.split(":")[1].strip()
                     stocks.append(int(value))
 
-        return stocks # Se devuelve el valor para usarlo en la clase controller
+        return stocks  # Se devuelve el valor para usarlo en la clase controller
 
     @staticmethod
     def show_products_without_stock(path: Path):
         products_stock = []
         with open(path, "r", encoding="utf-8") as file:
-            lines = file.readlines() #Leemos el archivo entero
+            lines = file.readlines()  # Leemos el archivo entero
             """
             enumerate() es una función integrada de Python que sirve para recorrer una secuencia (lista, tupla, etc.)
              obteniendo a la vez el índice y el valor de cada elemento.
@@ -57,12 +60,12 @@ class IO:
                 i es el número de línea (0, 1, 2, …).
                 line es el contenido de esa línea.
                 """
-                if line.startswith("Stock:"): #Aquí se comprueba que la línea comience con Stock: si no se ignora y
-                    #Se pasa a la siguiente
-                    value = int(line.split(":")[1].strip()) #Dividimos en dos la cadena, limpiamos espacios
+                if line.startswith("Stock:"):  # Aquí se comprueba que la línea comience con Stock: si no se ignora y
+                    # Se pasa a la siguiente
+                    value = int(line.split(":")[1].strip())  # Dividimos en dos la cadena, limpiamos espacios
                     # y pasamos el stock a entero para evaluarlo
-                    if value == 0: #Si el stock es 0 se entra en el bucle anidado
-                        for j in range(i -1, -1, -1):
+                    if value == 0:  # Si el stock es 0 se entra en el bucle anidado
+                        for j in range(i - 1, -1, -1):
                             """
                             i-1 -> start -> -1 stop, -> -1 step
                             
@@ -77,11 +80,11 @@ class IO:
                             -1 (tercer parámetro) → es el paso, el incremento (en este caso decremento).
                             Como es negativo, el bucle va hacia atrás: 4, 3, 2, 1, 0.
                             """
-                            if lines[j].startswith("Nombre:"): #Se comprueba que la linea del la posicion del indice J
-                                #Sea == a Nombre: y se realiza la extraccion del nombre de los productos
+                            if lines[j].startswith("Nombre:"):  # Se comprueba que la linea del la posicion del indice J
+                                # Sea == a Nombre: y se realiza la extraccion del nombre de los productos
                                 product = lines[j].split(":")[1].strip()
                                 products_stock.append(product)
-                                #Se rompe el bucle por si hay que seguir evaluando más stocks que sean igual a 0
+                                # Se rompe el bucle por si hay que seguir evaluando más stocks que sean igual a 0
                                 break
         return products_stock  # Se devuelve el valor para usarlo en la clase controller
 
@@ -89,21 +92,27 @@ class IO:
     def update_stock_by_product(path: Path, new_stock, product):
         with open(path, "r", encoding="utf-8") as file:
             lines = file.readlines()
+            product_found = False
             for i, line in enumerate(lines):
                 if f"Nombre: {product}" in line:
                     # El stock está 2 líneas más abajo según el formato del archivo
                     stock_line_index = i + 2
                     lines[stock_line_index] = f"Stock: {new_stock}\n"
+                    product_found = True #Si el producto introducido existe realmente en el fichero ponemos
+                    # la variable a true para luego escribir de nuevo el fichero, si no solo se muestra error
                     break  # salimos una vez hecho el cambio
                 else:
+                    format_output()
                     print("El producto introducido no se encuentra en el fichero por favor, revisa que los \n"
                           "espacios, mayúsculas y minúsculas del valor introducido correspondan dentro del fichero")
-        with open(path, "w", encoding="utf-8") as new_file:
-            new_file.writelines(lines)
-            format_output()
-            print("El stock ha sido actualizado correctamente")
-            format_output()
-
+                    format_output()
+                    break
+        if product_found: #Solo actualizamos el sotck si el producto realmente existe
+            with open(path, "w", encoding="utf-8") as new_file:
+                new_file.writelines(lines)
+                format_output()
+                print("El stock ha sido actualizado correctamente")
+                format_output()
 
     @staticmethod
     def write_file(path: Path, write_string):

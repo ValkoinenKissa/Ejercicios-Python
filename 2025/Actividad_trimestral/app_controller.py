@@ -131,4 +131,6 @@ class AppController:
 
     @staticmethod
     def update_product_stock():
-        IO.update_stock_by_product(path, 5, "iPhone 15")
+        product_name =str(input("Introduce el nombre del producto el cual quieres modificar su stock: "))
+        product_new_stock = int(input("Introduce el nuevo stock del producto: "))
+        IO.update_stock_by_product(path, product_new_stock, product_name)
