@@ -32,7 +32,7 @@ class AppController:
             # Incluyo una función adicional para agregar más productos al fichero
             print("3 - Introducir un nuevo producto en el inventario (genera un nuevo producto en el fichero")
             print("4 - Calcular el valor total del inventario")
-            print("5 - Identificar productos agotados (con stock igual a 0")
+            print("5 - Identificar productos agotados (con stock igual a 0)")
             print("6 - Actualizar cantidad de un producto (el producto debe de estar listado en el fichero)")
             print("7 - Abandonar el programa")
             format_output()
@@ -78,7 +78,6 @@ class AppController:
         if path.exists():
             # Le paso la instancia del objeto Path al metodo estatico de IO, internamente el metodo se lo pasa al with
             IO.read_file(path)
-            format_output()
             print("El inventario ha sido cargado con exito")
             format_output()
 
