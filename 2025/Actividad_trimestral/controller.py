@@ -94,11 +94,17 @@ class Controller:
 
     @staticmethod
     def calculate_inventory_value():
-        prices = IO.read_file_prices(path)
+        prices = IO.read_file_prices(path) # Almacenamos la lista de precios y de stocks que hemos
+        stocks = IO.read_file_stock(path) # generado en la clase controller
         acum = 0
-        for i in prices:
-            acum += i
-        print(f"El valor total del inventario es de: {acum}€")
+        if len(prices) == len(stocks): #Comprobamos que cada precio de producto tenga un stock asignado
+            for i in range(len(prices)):
+                acum = acum + (prices[i] * stocks[i]) #Multiplicamos y sumamos al acumulador los precios y el stock
+                # en cada iteracion del bucle
+        else:
+            print("Error: No se puede calcular el valor del inventario, revisa que el stock y el precio de \n"
+                  "los productos no este incompleto dentro del fichero") #Si la longitud de los arrays es desigual
+        print(f"El valor total del inventario es de: {acum}€") #Mostramos al usuario el valor total del inventario
 
     @staticmethod
     def show_products_without_any_stock():

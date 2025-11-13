@@ -29,6 +29,17 @@ class IO:
         return prices  # Se devuelve el valor para usarlo en la clase controller
 
     @staticmethod
+    def read_file_stock(path : Path):
+        stocks = []
+        with open(path, "r", encoding="utf-8") as file:
+            for line in file:
+                if line.startswith("Stock:"):
+                    value = line.split(":")[1].strip()
+                    stocks.append(int(value))
+
+        return stocks # Se devuelve el valor para usarlo en la clase controller
+
+    @staticmethod
     def show_products_without_stock(path: Path):
         products_stock = []
         with open(path, "r", encoding="utf-8") as file:
