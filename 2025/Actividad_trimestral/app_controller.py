@@ -78,6 +78,9 @@ class AppController:
         if path.exists():
             # Le paso la instancia del objeto Path al metodo estatico de IO, internamente el metodo se lo pasa al with
             IO.read_file(path)
+            format_output()
+            print("El inventario ha sido cargado con exito")
+            format_output()
 
         else:
             # Este metodo de la clase IO crea un fichero con valores predefinidos
