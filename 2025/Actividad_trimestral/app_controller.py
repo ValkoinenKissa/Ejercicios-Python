@@ -40,6 +40,7 @@ class AppController:
             match option:
                 case "1":
                     AppController.load_inventory()
+                    #TODO crear un metodo para mostrar inventario completamenete formateado
                 case "2":
                     AppController.load_inventory()
                 case "3":
