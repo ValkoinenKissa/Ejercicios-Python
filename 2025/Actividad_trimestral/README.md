@@ -9,7 +9,7 @@ Para cumplir literalmente con el requisito de entrega, se incluye un archivo `ge
 ```
 2025/Actividad_trimestral/
 ├─ gestion_inventario.py     # Punto de entrada al programa; delega en Controller
-├─ controller.py             # Controller: orquesta las acciones del usuario
+├─ app_controller.py             # Controller: orquesta las acciones del usuario
 ├─ io_ops.py                 # I/O: lectura/escritura de inventario y utilidades
 ├─ product.py                # Modelo de dominio: Product (nombre, precio, stock)
 └─ data/
@@ -53,7 +53,7 @@ El programa mostrará un menú con las opciones solicitadas.
 
 - Patrón MVC para separar responsabilidades:
   - `product.py` (Modelo): datos y representación de productos.
-  - `controller.py` (Controlador): lógica del flujo de datos.
+  - `app_controller.py` (Controlador): lógica del flujo de datos.
   - `io_ops.py` (Persistencia / View I/O): lectura, escritura y formateo de salida.
 - Nomenclatura en inglés en clases/métodos/variables por coherencia con prácticas de proyectos reales.
 - Fichero `gestion_inventario.py` para cumplir literalmente el requisito de la tarea sin sacrificar la arquitectura.

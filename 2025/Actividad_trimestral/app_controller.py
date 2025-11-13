@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from product import Product
 from io_ops import IO
 
@@ -13,7 +12,11 @@ path = Path("data/inventario.txt")
 products = []
 
 
-class Controller:
+def format_output(): #Metodo para mostrar esta linea separadora por pantalla
+    print("--------------------------------------------------------------------------------------------------")
+
+
+class AppController:
 
     def __init__(self):
         pass  # Constructor vacio
@@ -22,7 +25,7 @@ class Controller:
     def start_app():
         stop = False
         print("Bienvenido al programa de gestion de inventario, elige una opción: ")
-        print("--------------------------------------------------------------------------------------------------")
+        format_output()
         while not stop:
             print("1 - Carga del inventario, si el fichero no existe, se autogenerara un fichero de ejemplo")
             print("2 - Mostrar el inventario (Se imprime en pantalla el inventario mediante un formato legible")
@@ -32,21 +35,21 @@ class Controller:
             print("5 - Identificar productos agotados (con stock igual a 0")
             print("6 - Actualizar cantidad de un producto (el producto debe de estar listado en el fichero)")
             print("7 - Abandonar el programa")
-            print("--------------------------------------------------------------------------------------------------")
+            format_output()
             option = str(input("Introduce la opción deseada (num opción) -> "))
             match option:
                 case "1":
-                    Controller.load_inventory()
+                    AppController.load_inventory()
                 case "2":
-                    Controller.load_inventory()
+                    AppController.load_inventory()
                 case "3":
-                    Controller.create_product()
+                    AppController.create_product()
                 case "4":
-                    Controller.calculate_inventory_value()
+                    AppController.calculate_inventory_value()
                 case "5":
-                    Controller.show_products_without_any_stock()
+                    AppController.show_products_without_any_stock()
                 case "6":
-                    Controller.update_product_stock()
+                    AppController.update_product_stock()
                 case "7":
                     print("¡Hasta pronto!")
                     stop = True
@@ -66,9 +69,10 @@ class Controller:
         p = Product(product_name, price, stock)
         products.append(p)
         # los productos se cargan en el fichero de texto con este metodo:
-        Controller.write_inventory()
+        AppController.write_inventory()
+        format_output()
         print("¡Producto añadido con éxito!")
-
+        format_output()
     @staticmethod
     def load_inventory():
         if path.exists():
@@ -102,18 +106,25 @@ class Controller:
                 acum = acum + (prices[i] * stocks[i]) #Multiplicamos y sumamos al acumulador los precios y el stock
                 # en cada iteracion del bucle
         else:
+            format_output()
             print("Error: No se puede calcular el valor del inventario, revisa que el stock y el precio de \n"
                   "los productos no este incompleto dentro del fichero") #Si la longitud de los arrays es desigual
+            format_output()
+        format_output()
         print(f"El valor total del inventario es de: {acum}€") #Mostramos al usuario el valor total del inventario
-
+        format_output()
     @staticmethod
     def show_products_without_any_stock():
         product_list = IO.show_products_without_stock(path)
         if len(product_list) == 0:
+            format_output()
             print("Actualmente no se han encontrado productos sin stock")
+            format_output()
 
         else:
+            format_output()
             print(f"Estos son los productos que actualmente no tienen stock: {product_list}")
+            format_output()
 
     @staticmethod
     def update_product_stock():

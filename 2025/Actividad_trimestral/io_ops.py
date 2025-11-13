@@ -1,17 +1,21 @@
 from pathlib import Path
 
+
+def format_output():
+    print("--------------------------------------------------------------------------------------------------")
+#Metodo para mostrar esta linea separadora por pantalla
+
 class IO:
     # El decorador @staticmethod nos sirve para declararle al intérprete que un metodo es estatico y no requiere de una
     # instancia de clase
     @staticmethod
     def read_file(path: Path):
         # with asegura que el archivo se cierre automáticamente, incluso si ocurre un error
-        print("--------------------------------------------------------------------------------------------------")
+        format_output()
         with open(path, "r") as file:  # La r indica a with que queremos leer el contenido
             content = file.read()
             print(content)
-        print("--------------------------------------------------------------------------------------------------")
-
+        format_output()
     @staticmethod
     def read_file_prices(path: Path):
         prices = []
@@ -96,7 +100,9 @@ class IO:
                           "espacios, mayúsculas y minúsculas del valor introducido correspondan dentro del fichero")
         with open(path, "w", encoding="utf-8") as new_file:
             new_file.writelines(lines)
+            format_output()
             print("El stock ha sido actualizado correctamente")
+            format_output()
 
 
     @staticmethod
