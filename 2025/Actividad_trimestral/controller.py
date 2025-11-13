@@ -103,7 +103,7 @@ class Controller:
     @staticmethod
     def show_products_without_any_stock():
         product_list = IO.show_products_without_stock(path)
-        if len(product_list) < 0:
+        if len(product_list) == 0:
             print("Actualmente no se han encontrado productos sin stock")
 
         else:
