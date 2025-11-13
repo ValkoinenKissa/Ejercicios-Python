@@ -1,6 +1,6 @@
 Nombre: iPhone 15
 Precio: 900 
-Stock: 5
+Stock: 22
 Nombre: Samsung S20
 Precio: 700
 Stock: 0
