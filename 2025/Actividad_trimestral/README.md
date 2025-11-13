@@ -2,14 +2,13 @@
 
 Este proyecto implementa el ejercicio de "Gestión de inventario de una tienda electrónica" utilizando el patrón de diseño MVC (Model–View–Controller) para mejorar separación de responsabilidades, legibilidad y escalabilidad, tal y como se haría en un proyecto real.
 
-Para cumplir literalmente con el requisito de entrega, se incluye un archivo `gestion_inventario.py` que actúa como punto de entrada (wrapper) y arranca la aplicación manteniendo la arquitectura modular.
+Para cumplir literalmente con el requisito de entrega, se incluye un archivo `gestion_inventario.py` que actúa como punto de entrada y arranca la aplicación manteniendo la arquitectura modular.
 
 ## Estructura del proyecto
 
 ```
 2025/Actividad_trimestral/
-├─ gestion_inventario.py     # Punto de entrada solicitado por el enunciado
-├─ main.py                   # Entrada alternativa; delega en Controller
+├─ gestion_inventario.py     # Punto de entrada al programa; delega en Controller
 ├─ controller.py             # Controller: orquesta las acciones del usuario
 ├─ io_ops.py                 # I/O: lectura/escritura de inventario y utilidades
 ├─ product.py                # Modelo de dominio: Product (nombre, precio, stock)
@@ -33,17 +32,17 @@ El programa mostrará un menú con las opciones solicitadas.
 
 ## Cumplimiento de requisitos del enunciado
 
-- Carga del Inventario: Cumplido
+- Carga del Inventario: ✅
   - Se lee desde `data/inventario.txt`. Si no existe, se crea automáticamente con datos de ejemplo.
-- Mostrar el Inventario: Cumplido
+- Mostrar el Inventario: ✅
   - Opción del menú dedicada a imprimir nombre, precio y cantidad de cada producto en formato legible.
-- Calcular el Valor Total del Inventario: Cumplido
+- Calcular el Valor Total del Inventario: ✅
   - Se calcula el valor total (precio × cantidad) y se muestra por pantalla.
-- Identificar Productos Agotados: Cumplido
+- Identificar Productos Agotados: ✅
   - Se listan los productos cuya cantidad disponible es 0.
-- Actualizar Cantidad de un Producto: Cumplido
+- Actualizar Cantidad de un Producto: ✅
   - El usuario puede seleccionar un producto y modificar su cantidad; el cambio persiste en `inventario.txt`.
-- Persistencia: Cumplido
+- Persistencia: ✅
   - Todas las operaciones de lectura/escritura impactan en el fichero `data/inventario.txt`.
 
 ## Funcionalidad extra
@@ -54,7 +53,7 @@ El programa mostrará un menú con las opciones solicitadas.
 
 - Patrón MVC para separar responsabilidades:
   - `product.py` (Modelo): datos y representación de productos.
-  - `controller.py` (Controlador): lógica de flujo y orquestación de casos de uso.
+  - `controller.py` (Controlador): lógica del flujo de datos.
   - `io_ops.py` (Persistencia / View I/O): lectura, escritura y formateo de salida.
 - Nomenclatura en inglés en clases/métodos/variables por coherencia con prácticas de proyectos reales.
 - Fichero `gestion_inventario.py` para cumplir literalmente el requisito de la tarea sin sacrificar la arquitectura.
