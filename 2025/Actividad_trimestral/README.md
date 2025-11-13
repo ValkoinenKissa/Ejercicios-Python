@@ -16,8 +16,6 @@ Para cumplir literalmente con el requisito de entrega, se incluye un archivo `ge
    └─ inventario.txt         # Persistencia del inventario (se crea si no existe)
 ```
 
-Nota: el inventario se guarda en `data/inventario.txt`. Si el profesor espera exactamente `inventario.txt` en la raíz, se puede ajustar la ruta fácilmente; en esta entrega se documenta y se versiona en `data/`.
-
 ## Cómo ejecutar
 
 Requisitos: Python 3.10+ (se usa `match/case`).
