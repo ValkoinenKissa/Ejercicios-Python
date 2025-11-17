@@ -28,12 +28,12 @@ class AppController:
         format_output()
         while not stop:
             print("1 - Carga del inventario, si el fichero no existe, se autogenerara un fichero de ejemplo")
-            print("2 - Mostrar el inventario (Se imprime en pantalla el inventario mediante un formato legible)")
+            print("2 - Mostrar el inventario formateado")
             # Incluyo una función adicional para agregar más productos al fichero
-            print("3 - Introducir un nuevo producto en el inventario (genera un nuevo producto en el fichero)")
+            print("3 - Introducir un nuevo producto en el inventario")
             print("4 - Calcular el valor total del inventario")
-            print("5 - Identificar productos agotados (con stock igual a 0)")
-            print("6 - Actualizar cantidad de un producto (el producto debe de estar listado en el fichero)")
+            print("5 - Identificar productos agotados")
+            print("6 - Actualizar cantidad de un producto")
             print("7 - Abandonar el programa")
             format_output()
             option = str(input("Introduce la opción deseada (num opción) -> "))
