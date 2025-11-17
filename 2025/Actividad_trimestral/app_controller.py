@@ -28,9 +28,9 @@ class AppController:
         format_output()
         while not stop:
             print("1 - Carga del inventario, si el fichero no existe, se autogenerara un fichero de ejemplo")
-            print("2 - Mostrar el inventario (Se imprime en pantalla el inventario mediante un formato legible")
+            print("2 - Mostrar el inventario (Se imprime en pantalla el inventario mediante un formato legible)")
             # Incluyo una función adicional para agregar más productos al fichero
-            print("3 - Introducir un nuevo producto en el inventario (genera un nuevo producto en el fichero")
+            print("3 - Introducir un nuevo producto en el inventario (genera un nuevo producto en el fichero)")
             print("4 - Calcular el valor total del inventario")
             print("5 - Identificar productos agotados (con stock igual a 0)")
             print("6 - Actualizar cantidad de un producto (el producto debe de estar listado en el fichero)")
@@ -40,9 +40,8 @@ class AppController:
             match option:
                 case "1":
                     AppController.load_inventory()
-                    #TODO crear un metodo para mostrar inventario completamenete formateado
                 case "2":
-                    AppController.load_inventory()
+                    AppController.show_formated_inventory()
                 case "3":
                     AppController.create_product()
                 case "4":
@@ -134,3 +133,8 @@ class AppController:
         product_name =str(input("Introduce el nombre del producto el cual quieres modificar su stock: "))
         product_new_stock = int(input("Introduce el nuevo stock del producto: "))
         IO.update_stock_by_product(path, product_new_stock, product_name)
+
+    @staticmethod
+    def show_formated_inventory():
+        IO.formated_inventory(path)
+

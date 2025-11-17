@@ -1,4 +1,5 @@
 from pathlib import Path
+from tabulate import tabulate
 
 
 def format_output():
@@ -18,6 +19,29 @@ class IO:
             content = file.read()
             print(content)
         format_output()
+
+    @staticmethod
+    def formated_inventory(path: Path):
+        content = []
+        name = price = stock = None  # Declaramos las variables de los valores que vamos a leer del fichero como nulas con None
+
+        with open(path, "r", encoding="utf-8") as file:
+            for line in file:  # Recorremos el fichero y vamos almacenando sus valores
+                if line.startswith("Nombre:"):
+                    name = line.split(":")[1].strip()
+                if line.startswith("Precio:"):
+                    price = line.split(":")[1].strip()
+                if line.startswith("Stock:"):
+                    stock = line.split(":")[1].strip()
+                if name is not None and price is not None and stock is not None:  # Validamos que los datos no sean nulos
+                    # si alguno es nulo seguimos recorriendo el array
+                    content.append(
+                        [name, int(price), int(stock)])  # Creamos un array bidimensional de contenidos dentro
+                    name = price = stock = None  # Limpiamos los valores para no crear duplicados en la siguiente interaccion
+
+            # del array principal, esto es necesario para utilizar la libreria
+            print(tabulate(content, headers=["Nombre producto", "Precio €", "Stock"], tablefmt="grid"))
+        # En este print le decimos a tabulate como queremos que sea el formato de la impresión
 
     @staticmethod
     def read_file_prices(path: Path):
@@ -98,7 +122,7 @@ class IO:
                     # El stock está 2 líneas más abajo según el formato del archivo
                     stock_line_index = i + 2
                     lines[stock_line_index] = f"Stock: {new_stock}\n"
-                    product_found = True #Si el producto introducido existe realmente en el fichero ponemos
+                    product_found = True  # Si el producto introducido existe realmente en el fichero ponemos
                     # la variable a true para luego escribir de nuevo el fichero, si no solo se muestra error
                     break  # salimos una vez hecho el cambio
                 else:
@@ -107,7 +131,7 @@ class IO:
                           "espacios, mayúsculas y minúsculas del valor introducido correspondan dentro del fichero")
                     format_output()
                     break
-        if product_found: #Solo actualizamos el sotck si el producto realmente existe
+        if product_found:  # Solo actualizamos el sotck si el producto realmente existe
             with open(path, "w", encoding="utf-8") as new_file:
                 new_file.writelines(lines)
                 format_output()
