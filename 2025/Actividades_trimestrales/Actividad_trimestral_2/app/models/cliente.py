@@ -5,6 +5,7 @@ from reserva import Reserva
 from actividad import Actividad
 @dataclass
 class Persona:
+    id:str
     nombre: str
     email: str
     reservas: list[Reserva] = field(default_factory=list)
