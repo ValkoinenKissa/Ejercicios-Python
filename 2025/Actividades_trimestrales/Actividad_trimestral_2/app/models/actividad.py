@@ -14,13 +14,18 @@ class Actividad(ABC): # Declaración como clase abstracta
     def plazas_disponibles(self) -> int:
         return self.plazas_totales - self.plazas_ocupadas
 
-    @abstractmethod
     @property
+    def esta_completa(self) -> bool:
+        if self.plazas_disponibles < self.plazas_totales:
+            return True
+        else:
+            return False
+    @property
+    @abstractmethod
     def tiene_plazas(self) -> bool:
         pass
-
-    @abstractmethod
     @property
+    @abstractmethod
     def precio_final(self) -> float:
         pass
 

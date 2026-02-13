@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
-from actividad import Actividad
-from empleado import Empleado
+from .actividad import Actividad
+from .empleado import Empleado
 
 @dataclass
 class Entrenador(Empleado): # Heredar de la dataclass de empleado

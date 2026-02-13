@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from actividad import Actividad
+from .actividad import Actividad
 
 
 @dataclass
