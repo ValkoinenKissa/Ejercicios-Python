@@ -205,12 +205,15 @@ class AppController:
             # Pedir fecha
             fecha = input("Fecha de la reserva (ej: 2024-03-15): ")
 
-            # Realizar reserva a través del controlador
-            print(f"\n✅ RESERVA CONFIRMADA")
-            print(f"Cliente: {cliente.nombre}")
-            print(f"Actividad: {actividad.nombre}")
-            print(f"Precio final: {actividad.precio_final:.2f}€")
-            print(f"Fecha: {fecha}")
+            # Realizar reserva a través del gestor
+            if self.gestor_reservas.realizar_reserva(cliente, actividad, fecha):
+                print(f"\n✅ RESERVA CONFIRMADA")
+                print(f"Cliente: {cliente.nombre}")
+                print(f"Actividad: {actividad.nombre}")
+                print(f"Precio final: {actividad.precio_final:.2f}€")
+                print(f"Fecha: {fecha}")
+            else:
+                print("❌ No se pudo realizar la reserva")
 
         except ValueError:
             print("❌ Entrada inválida")
