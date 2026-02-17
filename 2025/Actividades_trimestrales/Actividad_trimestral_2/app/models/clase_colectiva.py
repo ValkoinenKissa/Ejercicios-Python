@@ -15,10 +15,6 @@ class ClaseColectiva(Actividad):
     def precio_final(self) -> float:
         return self.precio_base
 
-    @property
-    def esta_completa(self) -> bool:
-        return self.plazas_disponibles == 0
-
     def control_accesos(self) -> bool:
         if self.esta_completa:
             print(f" {self.nombre} - Aforo completo ({self.plazas_ocupadas}/{self.plazas_totales})")

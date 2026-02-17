@@ -16,10 +16,9 @@ class Actividad(ABC): # Declaración como clase abstracta
 
     @property
     def esta_completa(self) -> bool:
-        if self.plazas_disponibles < self.plazas_totales:
-            return True
-        else:
-            return False
+        """Indica si la actividad ha alcanzado el aforo máximo."""
+        return self.plazas_disponibles == 0
+
     @property
     @abstractmethod
     def tiene_plazas(self) -> bool:

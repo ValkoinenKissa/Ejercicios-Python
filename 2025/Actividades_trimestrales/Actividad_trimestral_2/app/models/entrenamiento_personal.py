@@ -16,11 +16,6 @@ class EntrenamientoPersonal(Actividad):
         """Precio base + recargo porcentual"""
         return self.precio_base * (1 + self.recargo_porcentaje / 100)
 
-    @property
-    def esta_completa(self) -> bool:
-        """Verifica si el entrenamiento está completo"""
-        return self.plazas_disponibles == 0
-
     def control_accesos(self) -> bool:
         """Verifica si se puede realizar una reserva"""
         if self.esta_completa:
