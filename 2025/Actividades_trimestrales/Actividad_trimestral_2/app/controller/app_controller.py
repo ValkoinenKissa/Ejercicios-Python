@@ -213,7 +213,7 @@ class AppController:
                     # Caso raro: reservar_plaza() devolvió False sin lanzar excepción
                     print("❌ No se pudo realizar la reserva")
             except SinPlazasDisponiblesError as e:
-                # RF6 - Gestión de errores de negocio mediante excepciones
+                # Gestión de errores de negocio mediante excepciones
                 print(f"❌ {e}")
 
         except ValueError:

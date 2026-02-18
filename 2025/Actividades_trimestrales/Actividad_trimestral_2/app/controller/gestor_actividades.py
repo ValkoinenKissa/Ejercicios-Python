@@ -19,7 +19,7 @@ class GestorActividades:
 
     def crear_clase_colectiva(self, nombre: str, precio_base: float,
                               plazas_totales: int, horario: str) -> ClaseColectiva:
-        """RF2 - Crear actividad tipo ClaseColectiva"""
+        """Crear actividad tipo ClaseColectiva"""
         clase = ClaseColectiva(
             nombre=nombre,
             precio_base=precio_base,
@@ -31,7 +31,7 @@ class GestorActividades:
 
     def crear_entrenamiento_personal(self, nombre: str, precio_base: float,
                                      plazas_totales: int, recargo: float) -> EntrenamientoPersonal:
-        """RF2 - Crear actividad tipo EntrenamientoPersonal"""
+        """Crear actividad tipo EntrenamientoPersonal"""
         entrenamiento = EntrenamientoPersonal(
             nombre=nombre,
             precio_base=precio_base,

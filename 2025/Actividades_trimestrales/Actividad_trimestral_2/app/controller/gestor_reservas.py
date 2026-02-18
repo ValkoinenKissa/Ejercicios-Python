@@ -6,7 +6,7 @@ from ..models.errores import SinPlazasDisponiblesError
 
 
 def obtener_reservas_cliente(cliente: Cliente) -> List[Reserva]:
-    """RF5 - Consulta de información de reservas"""
+    """Consulta de información de reservas"""
     return cliente.reservas
 
 
@@ -25,10 +25,9 @@ def cancelar_reserva(cliente: Cliente, indice_reserva: int) -> bool:
 
 def realizar_reserva(cliente: Cliente, actividad: Actividad, fecha: str) -> bool:
     """
-    RF3 - Gestión de reservas
     Realiza una reserva verificando disponibilidad
     """
-    # RF3 - Comprobar plazas disponibles
+    # Comprobar plazas disponibles
     if not actividad.tiene_plazas:
         raise SinPlazasDisponiblesError(
             f"No hay plazas disponibles en la actividad '{actividad.nombre}'"
@@ -37,7 +36,7 @@ def realizar_reserva(cliente: Cliente, actividad: Actividad, fecha: str) -> bool
     # Crear reserva
     reserva = Reserva(actividad=actividad, fecha=fecha)
 
-    # RF3 - Reservar plaza (incrementa plazas_ocupadas)
+    # Reservar plaza (incrementa plazas_ocupadas)
     if actividad.reservar_plaza():
         cliente.agregar_reserva(reserva)
         return True
