@@ -3,6 +3,7 @@ from .gestor_actividades import GestorActividades, obtener_tipo_actividad
 from .gestor_reservas import GestorReservas, obtener_reservas_cliente, cancelar_reserva
 from ..models.clase_colectiva import ClaseColectiva
 from ..models.entrenamiento_personal import EntrenamientoPersonal
+from ..models.errores import SinPlazasDisponiblesError
 
 
 def mostrar_menu_principal():
@@ -197,23 +198,23 @@ class AppController:
                 print("❌ Actividad inválida")
                 return
 
-            # Verificar disponibilidad
-            if not actividad.tiene_plazas:
-                print(f"❌ No hay plazas disponibles en '{actividad.nombre}'")
-                return
-
             # Pedir fecha
             fecha = input("Fecha de la reserva (ej: 2024-03-15): ")
 
             # Realizar reserva a través del gestor
-            if self.gestor_reservas.realizar_reserva(cliente, actividad, fecha):
-                print(f"\n✅ RESERVA CONFIRMADA")
-                print(f"Cliente: {cliente.nombre}")
-                print(f"Actividad: {actividad.nombre}")
-                print(f"Precio final: {actividad.precio_final:.2f}€")
-                print(f"Fecha: {fecha}")
-            else:
-                print("❌ No se pudo realizar la reserva")
+            try:
+                if self.gestor_reservas.realizar_reserva(cliente, actividad, fecha):
+                    print(f"\n✅ RESERVA CONFIRMADA")
+                    print(f"Cliente: {cliente.nombre}")
+                    print(f"Actividad: {actividad.nombre}")
+                    print(f"Precio final: {actividad.precio_final:.2f}€")
+                    print(f"Fecha: {fecha}")
+                else:
+                    # Caso raro: reservar_plaza() devolvió False sin lanzar excepción
+                    print("❌ No se pudo realizar la reserva")
+            except SinPlazasDisponiblesError as e:
+                # RF6 - Gestión de errores de negocio mediante excepciones
+                print(f"❌ {e}")
 
         except ValueError:
             print("❌ Entrada inválida")

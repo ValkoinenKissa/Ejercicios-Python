@@ -2,6 +2,7 @@ from typing import List
 from ..models.cliente import Cliente
 from ..models.actividad import Actividad
 from ..models.reserva import Reserva
+from ..models.errores import SinPlazasDisponiblesError
 
 
 def obtener_reservas_cliente(cliente: Cliente) -> List[Reserva]:
@@ -30,7 +31,9 @@ class GestorReservas:
         """
         # RF3 - Comprobar plazas disponibles
         if not actividad.tiene_plazas:
-            return False
+            raise SinPlazasDisponiblesError(
+                f"No hay plazas disponibles en la actividad '{actividad.nombre}'"
+            )
 
         # Crear reserva
         reserva = Reserva(actividad=actividad, fecha=fecha)
