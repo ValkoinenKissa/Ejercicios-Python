@@ -23,25 +23,28 @@ def cancelar_reserva(cliente: Cliente, indice_reserva: int) -> bool:
     return False
 
 
+def realizar_reserva(cliente: Cliente, actividad: Actividad, fecha: str) -> bool:
+    """
+    RF3 - Gestión de reservas
+    Realiza una reserva verificando disponibilidad
+    """
+    # RF3 - Comprobar plazas disponibles
+    if not actividad.tiene_plazas:
+        raise SinPlazasDisponiblesError(
+            f"No hay plazas disponibles en la actividad '{actividad.nombre}'"
+        )
+
+    # Crear reserva
+    reserva = Reserva(actividad=actividad, fecha=fecha)
+
+    # RF3 - Reservar plaza (incrementa plazas_ocupadas)
+    if actividad.reservar_plaza():
+        cliente.agregar_reserva(reserva)
+        return True
+
+    return False
+
+
 class GestorReservas:
-    def realizar_reserva(self, cliente: Cliente, actividad: Actividad, fecha: str) -> bool:
-        """
-        RF3 - Gestión de reservas
-        Realiza una reserva verificando disponibilidad
-        """
-        # RF3 - Comprobar plazas disponibles
-        if not actividad.tiene_plazas:
-            raise SinPlazasDisponiblesError(
-                f"No hay plazas disponibles en la actividad '{actividad.nombre}'"
-            )
-
-        # Crear reserva
-        reserva = Reserva(actividad=actividad, fecha=fecha)
-
-        # RF3 - Reservar plaza (incrementa plazas_ocupadas)
-        if actividad.reservar_plaza():
-            cliente.agregar_reserva(reserva)
-            return True
-
-        return False
+    pass
 

@@ -1,6 +1,6 @@
 from .gestor_usuarios import GestorUsuarios
 from .gestor_actividades import GestorActividades, obtener_tipo_actividad
-from .gestor_reservas import GestorReservas, obtener_reservas_cliente, cancelar_reserva
+from .gestor_reservas import GestorReservas, obtener_reservas_cliente, cancelar_reserva, realizar_reserva
 from ..models.clase_colectiva import ClaseColectiva
 from ..models.entrenamiento_personal import EntrenamientoPersonal
 from ..models.errores import SinPlazasDisponiblesError
@@ -203,7 +203,7 @@ class AppController:
 
             # Realizar reserva a través del gestor
             try:
-                if self.gestor_reservas.realizar_reserva(cliente, actividad, fecha):
+                if realizar_reserva(cliente, actividad, fecha):
                     print(f"\n✅ RESERVA CONFIRMADA")
                     print(f"Cliente: {cliente.nombre}")
                     print(f"Actividad: {actividad.nombre}")
